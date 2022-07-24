@@ -16,6 +16,7 @@ let renderTodo = (array ,node) =>{
   newTemplate.querySelector('.list__username').textContent =element.username
   newTemplate.querySelector('.list__email').textContent = element.email;
 
+  
   newTemplate.querySelector('.location__city').textContent =  element.address.city
   newTemplate.querySelector('.location__street').textContent =  element.address.street + ' street,'
   newTemplate.querySelector('.location__home').textContent =  element.address.suite
