@@ -219,14 +219,16 @@ margin-bottom: 10px;
 }
 
 .last__item{
-  text-align: right;
+  text-align: center;
   border: 5px double black;
   border-radius: 8px;
   background-color: beige;
   margin-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 .list__middle{
+  width: 400px;
   overflow: auto;
   height: 100%;
   max-height: 700px;
@@ -238,6 +240,7 @@ margin-bottom: 10px;
 
 .last__title{
   font-weight: 600;
+  font-size: 20px;
 }
 
 
@@ -255,4 +258,29 @@ margin-bottom: 10px;
 
 ::-webkit-scrollbar-thumb:hover {
   background: transparent; 
+}
+
+.last__mail{
+  text-decoration: none;
+  background-image: url(../img/mail.png);
+  background-size: 25px;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-position: left;
+  color: rgb(65, 65, 79);
+  margin-bottom: 10px;
+}
+
+.list__spinner{
+  position: absolute;
+  left: 50%;
+  top: 30%;
+}
+
+.last__mail:hover,.location__map:hover,.list__phone:hover,.list__email:hover,.list__website:hover{
+  color: #222;
+}
+.last__mail:active,.location__map:active,.list__phone:active,.list__email:active,.list__website:active{
+  color: #000;
 }

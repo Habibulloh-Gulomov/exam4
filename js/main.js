@@ -1,13 +1,16 @@
 let elList = document.querySelector('.list')
 let elTemplate = document.querySelector('.list__template').content
-let elItem = document.querySelector('.list__item')
+// elItem.querySelector('.list__item')
 
 let elFragment = document.createDocumentFragment();
 
 let renderTodo = (array ,node) =>{
+  elList.innerHTML = ''
  array.forEach(element => {
+ 
   let newTemplate = elTemplate.cloneNode(true)
-
+ 
+  newTemplate.querySelector('.list__item').dataset.todoId =  element.id
   newTemplate.querySelector('.list__id').textContent =  element.id
   newTemplate.querySelector('.list__user').textContent =  element.name + ','
   newTemplate.querySelector('.list__username').textContent =element.username
@@ -31,18 +34,11 @@ let renderTodo = (array ,node) =>{
   newTemplate.querySelector('.list__phone').setAttribute('href' , `tel:${element.phone}`)
   newTemplate.querySelector('.location__map').setAttribute('href' , `https://www.google.com/maps/@${element.address.geo.lat},${element.address.geo.lng}`)
 
-
-
   elFragment.appendChild(newTemplate)
 
  });
  node.appendChild(elFragment)
 }
-
-
-
-
-
 
   async function Users() {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
@@ -51,26 +47,30 @@ let renderTodo = (array ,node) =>{
   }
   Users()
 
-
-
   let elItemPost = document.querySelector('.template__item')
   let elListPost = document.querySelector('.list__bottom')
   let elTemplatePost = document.querySelector('.list__bottom__template').content
   let elFragmentPost = document.createDocumentFragment();
 
   let renderPost = (array ,node) =>{
+    elListPost.innerHTML = ''
     array.filter(element => {
     let newTemplatePost = elTemplatePost.cloneNode(true)
-   
+    newTemplatePost.querySelector('.template__item').dataset.todoId =  element.postId
+  
       newTemplatePost.querySelector('.template__title').textContent = element.title
       newTemplatePost.querySelector('.template__text').textContent = element.body;
       elFragmentPost.appendChild(newTemplatePost)
-   
     });
     node.appendChild(elFragmentPost)
    }
 
   elList.addEventListener('click' , function(evt){
+    if(evt.target.matches('.list__item')){
+    let newID = evt.target.dataset.todoId
+    console.log(newID)
+
+    }
     async function userText() {
       const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
       const data = await response.json();
@@ -87,10 +87,12 @@ let renderTodo = (array ,node) =>{
   let elFragmentLast = document.createDocumentFragment();
 
   let renderLast = (array ,node) =>{
+    
     array.forEach(element => {
+      
     let newTemplateLast = elTemplateLast.cloneNode(true)
    
-      newTemplateLast.querySelector('.last__title').textContent = element.title;
+      newTemplateLast.querySelector('.last__title').textContent = element.name;
       newTemplateLast.querySelector('.last__mail').textContent = element.email;
       newTemplateLast.querySelector('.last__text').textContent = element.body;
 
@@ -100,11 +102,16 @@ let renderTodo = (array ,node) =>{
     node.appendChild(elFragmentLast)
    }
 
-  elListPost.addEventListener('click' , function(){
+  elListPost.addEventListener('click' , function(evt){
+    if(evt.target.matches('.template__item')){
+      let newID = evt.target.dataset.todoId
+      console.log(newID)
+  
+      }
     async function userComment() {
       const response = await fetch(`https://jsonplaceholder.typicode.com/comments`);
       const data = await response.json();
-      renderPost(data , elListLast)
+      renderLast(data , elListLast)
     }
     userComment()
   })
